@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from "react";
+import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
+import ErrorPage from "./pages/errorPage/ErrorPage";
+import SignIn from "./components/login/SignIn";
+import {HomePage} from "./pages/home/HomePage";
+import {useAuth} from "./providers/AuthProvider";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const routerConfig = [
+    {
+        path: "/",
+        element: <HomePage/>,
+        errorElement: <ErrorPage/>,
+    },
+    // {
+    //     path: "/wall",
+    //     element: <WallPage />,
+    //     errorElement: <ErrorPage />,
+    // },
+    // {
+    //     path: "/card",
+    //     element: <CardPage />,
+    //     errorElement: <ErrorPage />,
+    // },
+];
+
+const App = () => {
+    const { isAuthenticated } = useAuth();
+
+
+    return (
+        <Router>
+            <Routes>
+                {routerConfig.map((route, index) => (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        element={isAuthenticated ? route.element : <Navigate to="/login"/>}
+                    />
+                ))}
+                <Route path="/login" element={<SignIn/>}/>
+                {/*<Route path="/register" element={<SignUp />} />*/}
+            </Routes>
+        </Router>
+    );
+};
 
 export default App;
