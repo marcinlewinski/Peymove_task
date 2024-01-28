@@ -71,7 +71,7 @@ public class AuthenticationService {
     }
 
     private Set<Role> getDefaultRoles() {
-        Optional<Role> userRole = roleRepository.findByAuthority("ROLE_USER");
+        Optional<Role> userRole = roleRepository.findByAuthority("USER");
 
         Set<Role> authorities = new HashSet<>();
         Role role = userRole.orElseThrow(() -> new IllegalStateException("Default role 'ROLE_USER' not found in the database."));
