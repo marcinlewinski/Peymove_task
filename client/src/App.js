@@ -4,6 +4,8 @@ import ErrorPage from "./pages/errorPage/ErrorPage";
 import SignIn from "./components/login/SignIn";
 import {HomePage} from "./pages/home/HomePage";
 import {useAuth} from "./providers/AuthProvider";
+import {LoginPage} from "./pages/loginPage/LoginPage";
+import {RegisterPage} from "./pages/registerPage/RegisterPage";
 
 const routerConfig = [
     {
@@ -37,8 +39,8 @@ const App = () => {
                         element={isAuthenticated ? route.element : <Navigate to="/login"/>}
                     />
                 ))}
-                <Route path="/login" element={<SignIn/>}/>
-                {/*<Route path="/register" element={<SignUp />} />*/}
+                <Route path="/login" element={<LoginPage/>} />
+                <Route path="/register" element={<RegisterPage/>} />
             </Routes>
         </Router>
     );
