@@ -12,13 +12,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 public class AuthenticationIntegrationTest {
 
     @Autowired
@@ -29,6 +33,7 @@ public class AuthenticationIntegrationTest {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+
 
     @Test
     public void testLogin_ValidCredentials_ShouldReturnJwtToken() throws Exception {
@@ -44,7 +49,7 @@ public class AuthenticationIntegrationTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/auth/login")
                         .contentType("application/json")
                         .content("{\"email\": \"" + email + "\", \"password\": \"" + password + "\"}"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.jwt").exists());
     }
 

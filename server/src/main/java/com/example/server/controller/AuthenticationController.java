@@ -1,7 +1,9 @@
 package com.example.server.controller;
 
+import com.example.server.exception.RegistrationException;
 import com.example.server.model.AuthenticationRequestDTO;
 import com.example.server.model.LoginResponseDTO;
+import com.example.server.model.RegistrationDTO;
 import com.example.server.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,4 +28,15 @@ public class AuthenticationController {
         LoginResponseDTO response = authenticationService.loginUser(request.getEmail(), request.getPassword());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<Object> registerUser(@RequestBody RegistrationDTO request) {
+        try {
+            authenticationService.registerUser(request.getEmail(), request.getPassword(), request.getName());
+            return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
+        } catch (RegistrationException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }
