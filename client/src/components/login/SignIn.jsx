@@ -17,7 +17,7 @@ import {httpClient} from "../../hooks/httpClient";
 import {useAuth} from "../../providers/AuthProvider";
 import {useFormik} from "formik";
 import {useNavigate} from "react-router-dom";
-import {loginSchema} from "./loginSchema";
+import {LoginSchema} from "./schema/LoginSchema";
 
 const defaultTheme = createTheme();
 
@@ -31,7 +31,7 @@ export default function SignIn() {
             email: '',
             password: '',
         },
-        validationSchema: loginSchema,
+        validationSchema: LoginSchema,
         onSubmit: async (values) => {
             try {
                 const response = await httpClient.post("/auth/login", values);
@@ -63,7 +63,7 @@ export default function SignIn() {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{mt: 1}}>
+                    <Box component="form" onSubmit={formik.handleSubmit}  sx={{mt: 1}}>
                         {loginError && <Typography color="error">{loginError}</Typography>}
                         <TextField
                             margin="normal"
@@ -109,7 +109,7 @@ export default function SignIn() {
                         </Button>
                         <Grid container>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="/register" variant="body2">
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
