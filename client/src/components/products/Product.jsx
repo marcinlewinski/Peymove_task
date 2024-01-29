@@ -7,11 +7,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import {useCart} from "../../providers/CartProvider";
 
 export const Product = ({product}) => {
+    const { addToCart, removeFromCart, cartItems } = useCart();
+
     return (
         <Card sx={{
-
             maxWidth: 345,
             minWidth: 345,
             display: 'flex',
@@ -30,18 +32,19 @@ export const Product = ({product}) => {
                 <Typography gutterBottom variant="h5" component="div">
                     {product.productName}
                 </Typography>
+                <Typography sx={{textAlign:'center', fontWeight:'bold'}}>
+                    {cartItems[product.id] !== undefined && cartItems[product.id] !== 0 ? (product.price * cartItems[product.id]) : product.price}$
+                </Typography>
             </CardContent>
             <CardActions sx={{marginTop: 'auto'}}>
-                <Button size="small" onClick={() => {/* Handle add to cart */
-                }}>
+                <Button size="small" onClick={()=> addToCart(product.id)}>
                     <AddIcon/>
                 </Button>
                 <Typography gutterBottom variant="h5" component="div">
-                    0
+                    {cartItems[product.id] !== undefined ? cartItems[product.id] : 0}
                 </Typography>
 
-                <Button size="small" onClick={() => {/* Handle remove from cart */
-                }}>
+                <Button size="small" onClick={() => removeFromCart(product.id)}>
                     <RemoveIcon/>
                 </Button>
             </CardActions>
