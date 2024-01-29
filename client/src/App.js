@@ -8,6 +8,7 @@ import {RegisterPage} from "./pages/registerPage/RegisterPage";
 import Navbar from "./components/navbar/Navbar";
 import {CartPage} from "./pages/cartPage/CartPage";
 import {ProductsPage} from "./pages/productsPage/ProductsPage";
+import {CartProvider} from "./providers/CartProvider";
 
 const routerConfig = [
     {
@@ -39,18 +40,19 @@ const App = () => {
     return (
         <Router>
             {isAuthenticated ? <Navbar/> : null}
-            <Routes>
-                {routerConfig.map((route, index) => (
-                    <Route
-                        key={index}
-                        path={route.path}
-                        element={isAuthenticated ? route.element : <Navigate to="/login"/>}
-                    />
-                ))}
-
-                <Route path="/login" element={<LoginPage/>}/>
-                <Route path="/register" element={<RegisterPage/>}/>
-            </Routes>
+            <CartProvider>
+                <Routes>
+                    {routerConfig.map((route, index) => (
+                        <Route
+                            key={index}
+                            path={route.path}
+                            element={isAuthenticated ? route.element : <Navigate to="/login"/>}
+                        />
+                    ))}
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/register" element={<RegisterPage/>}/>
+                </Routes>
+            </CartProvider>
         </Router>
     );
 };
