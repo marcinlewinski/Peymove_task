@@ -1,11 +1,13 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import ErrorPage from "./pages/errorPage/ErrorPage";
-import SignIn from "./components/login/SignIn";
 import {HomePage} from "./pages/home/HomePage";
 import {useAuth} from "./providers/AuthProvider";
 import {LoginPage} from "./pages/loginPage/LoginPage";
 import {RegisterPage} from "./pages/registerPage/RegisterPage";
+import Navbar from "./components/navbar/Navbar";
+import {CartPage} from "./pages/cartPage/CartPage";
+import {ProductsPage} from "./pages/productsPage/ProductsPage";
 
 const routerConfig = [
     {
@@ -13,24 +15,30 @@ const routerConfig = [
         element: <HomePage/>,
         errorElement: <ErrorPage/>,
     },
-    // {
-    //     path: "/wall",
-    //     element: <WallPage />,
-    //     errorElement: <ErrorPage />,
-    // },
-    // {
-    //     path: "/card",
-    //     element: <CardPage />,
-    //     errorElement: <ErrorPage />,
-    // },
+    {
+        path: "/home",
+        element: <HomePage/>,
+        errorElement: <ErrorPage/>,
+    },
+    {
+        path: "/products",
+        element: <ProductsPage />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/cart",
+        element: <CartPage/>,
+        errorElement: <ErrorPage/>,
+    },
 ];
 
 const App = () => {
-    const { isAuthenticated } = useAuth();
+    const {isAuthenticated} = useAuth();
 
 
     return (
         <Router>
+            {isAuthenticated ? <Navbar/> : null}
             <Routes>
                 {routerConfig.map((route, index) => (
                     <Route
@@ -39,8 +47,9 @@ const App = () => {
                         element={isAuthenticated ? route.element : <Navigate to="/login"/>}
                     />
                 ))}
-                <Route path="/login" element={<LoginPage/>} />
-                <Route path="/register" element={<RegisterPage/>} />
+
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/register" element={<RegisterPage/>}/>
             </Routes>
         </Router>
     );
