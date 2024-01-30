@@ -13,7 +13,7 @@ export const Product = ({product}) => {
     const {addToCart, removeFromCart, cartItems} = useCart();
 
     const cartItem = cartItems.find(item => item.id === product.id);
-    const totalPrice = cartItem ? cartItem.quantity * product.price : 0;
+    const totalPrice = cartItem ? cartItem.quantity * product.price : product.price;
     const amount = cartItem ? cartItem.quantity : 0
 
     return (

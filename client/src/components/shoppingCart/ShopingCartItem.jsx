@@ -14,7 +14,11 @@ export const ShoppingCartItem = ({product}) => {
     const {addToCart, removeFromCart, cartItems} = useCart();
     const cartItem = cartItems.find(item => item.id === product.id);
     const totalPriceItem = cartItem ? cartItem.quantity * product.price : 0;
-    const amount = cartItem ? cartItem.quantity : 0
+    const amount = cartItem ? cartItem.quantity : 0;
+
+    if (amount === 0) {
+        return null;
+    }
 
     return (
         <Card sx={{
@@ -54,21 +58,21 @@ export const ShoppingCartItem = ({product}) => {
 
                     </Grid>
                     <Grid item xs={2} sm={2} md={2} lg={2}>
-                        <Typography variant="h6" component="div" sx={{textAlign:"center"}}>
+                        <Typography variant="h6" component="div" sx={{textAlign: "center"}}>
                             {amount}
                         </Typography>
 
                     </Grid>
 
                     <Grid item xs={10} sm={10} md={10} lg={10}>
-                            <Button size="small" onClick={()=> addToCart(product.id)}>
-                                <AddIcon/>
-                            </Button>
+                        <Button size="small" onClick={() => addToCart(product.id)}>
+                            <AddIcon/>
+                        </Button>
                     </Grid>
                     <Grid item xs={2} sm={2} md={2} lg={2}>
                         <Button size="small" onClick={() => removeFromCart(product.id)}>
-                                <RemoveIcon/>
-                            </Button>
+                            <RemoveIcon/>
+                        </Button>
 
                     </Grid>
 
