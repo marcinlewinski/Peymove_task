@@ -4,9 +4,9 @@ import {httpClient} from "../../hooks/httpClient";
 import CssBaseline from "@mui/material/CssBaseline";
 
 export const HomePage = () => {
-    httpClient.get("/user").then((res) => {
-        console.log(res);
-    })
+    // httpClient.get("/user").then((res) => {
+    //     console.log(res);
+    // })
     return (
         <>
             <React.Fragment>

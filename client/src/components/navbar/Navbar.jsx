@@ -34,7 +34,6 @@ function Navbar() {
     const handleCloseNavMenu = (page) => {
         setAnchorElNav(null);
         navigate(`/${page.toLowerCase()}`)
-        console.log(page)
     };
 
     const handleLogout = (event) => {

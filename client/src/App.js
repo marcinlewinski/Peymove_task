@@ -36,7 +36,6 @@ const routerConfig = [
 const App = () => {
     const {isAuthenticated} = useAuth();
 
-
     return (
         <Router>
             {isAuthenticated ? <Navbar/> : null}

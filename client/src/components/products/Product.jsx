@@ -10,7 +10,11 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import {useCart} from "../../providers/CartProvider";
 
 export const Product = ({product}) => {
-    const { addToCart, removeFromCart, cartItems } = useCart();
+    const {addToCart, removeFromCart, cartItems} = useCart();
+
+    const cartItem = cartItems.find(item => item.id === product.id);
+    const totalPrice = cartItem ? cartItem.quantity * product.price : 0;
+    const amount = cartItem ? cartItem.quantity : 0
 
     return (
         <Card sx={{
@@ -32,18 +36,17 @@ export const Product = ({product}) => {
                 <Typography gutterBottom variant="h5" component="div">
                     {product.productName}
                 </Typography>
-                <Typography sx={{textAlign:'center', fontWeight:'bold'}}>
-                    {cartItems[product.id] !== undefined && cartItems[product.id] !== 0 ? (product.price * cartItems[product.id]) : product.price}$
+                <Typography sx={{textAlign: 'center', fontWeight: 'bold'}}>
+                    {totalPrice}$
                 </Typography>
             </CardContent>
             <CardActions sx={{marginTop: 'auto'}}>
-                <Button size="small" onClick={()=> addToCart(product.id)}>
+                <Button size="small" onClick={() => addToCart(product.id)}>
                     <AddIcon/>
                 </Button>
                 <Typography gutterBottom variant="h5" component="div">
-                    {cartItems[product.id] !== undefined ? cartItems[product.id] : 0}
+                    {amount}
                 </Typography>
-
                 <Button size="small" onClick={() => removeFromCart(product.id)}>
                     <RemoveIcon/>
                 </Button>
