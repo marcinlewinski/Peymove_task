@@ -1,5 +1,7 @@
+import {ShoppingCart} from "../../components/shoppingCart/ShoppingCart";
+
 export const CartPage = () => {
   return (
-      <div>Cart</div>
+      <ShoppingCart></ShoppingCart>
   )
 }
