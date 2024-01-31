@@ -80,6 +80,8 @@ public class SecurityConfiguration {
                 }))
                 .authorizeHttpRequests(authorize -> {
                     authorize.requestMatchers(new AntPathRequestMatcher("/")).permitAll();
+                    authorize.requestMatchers(new AntPathRequestMatcher("/product/get")).permitAll();
+                    authorize.requestMatchers(new AntPathRequestMatcher("/orders/create")).permitAll();
                     authorize.requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll();
                     authorize.requestMatchers("/admin/**").hasAuthority("ADMIN");
                     authorize.requestMatchers("/user/**").hasAnyAuthority("ADMIN", "USER");
