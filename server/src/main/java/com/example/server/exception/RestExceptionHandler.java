@@ -32,4 +32,12 @@ public class RestExceptionHandler {
     public ResponseEntity<String> handleUserNotFoundException(UserNotFoundException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(OrderServiceException.class)
+    public ResponseEntity<String> handleOrderServiceException(OrderServiceException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    @ExceptionHandler(UserDataAccessException.class)
+    public ResponseEntity<String > handleUserDataAccessException(UserDataAccessException e){
+        return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
+    }
 }

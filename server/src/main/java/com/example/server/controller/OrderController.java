@@ -2,7 +2,9 @@ package com.example.server.controller;
 
 import com.example.server.exception.ProductNotFoundException;
 import com.example.server.exception.UserNotFoundException;
+import com.example.server.model.order.Order;
 import com.example.server.model.order.OrderItemRequest;
+import com.example.server.model.order.dto.OrderResponseDto;
 import com.example.server.service.order.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,5 +33,10 @@ public class OrderController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
+    }
+    @GetMapping("/all")
+    public ResponseEntity<List<OrderResponseDto>> getAllOrders() {
+        List<OrderResponseDto> orders = orderService.getAllOrders();
+        return ResponseEntity.ok(orders);
     }
 }

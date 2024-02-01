@@ -2,6 +2,7 @@ package com.example.server.model.order;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
+@Getter
 @Entity
 @Table(name = "order_items")
 public class OrderItem {
