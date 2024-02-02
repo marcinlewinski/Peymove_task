@@ -7,15 +7,16 @@ import {MockProducts} from "../products/MockProducts";
 import {OrderSummary} from "./OrderSummary";
 import {useCart} from "../../providers/CartProvider";
 import Box from "@mui/material/Box";
+import {useProduct} from "../../providers/ProductProvider";
 
 export const ShoppingCart = () => {
-    const [allProducts, setAllProducts] = useState(MockProducts);
+    const { productList } = useProduct();
     const {cartItems} = useCart();
     const [productOrder, setProductOrder] = useState(null);
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
-        const productsWithQuantity = allProducts.map((product) => {
+        const productsWithQuantity = productList?.map((product) => {
             const cartItem = cartItems.find((item) => item.id === product.id);
             const quantity = cartItem ? cartItem.quantity : 0;
             if (cartItem) {
@@ -36,7 +37,7 @@ export const ShoppingCart = () => {
         }, 0);
 
         setTotalPrice(calculatedTotalPrice);
-    }, [allProducts, cartItems]);
+    }, [productList, cartItems]);
     return (
         <React.Fragment>
             <CssBaseline/>

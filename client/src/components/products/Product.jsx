@@ -15,6 +15,7 @@ export const Product = ({product}) => {
     const cartItem = cartItems.find(item => item.id === product.id);
     const { totalPrice, amount } = calculateCartItemData(cartItem, product);
 
+
     return (
         <Card sx={{
             maxWidth: 345,
@@ -28,7 +29,7 @@ export const Product = ({product}) => {
                 component="img"
                 alt={product.productName}
                 height="140"
-                image={product.productImage}
+                image={product.image}
                 sx={{objectFit: 'cover'}}
             />
             <CardContent>

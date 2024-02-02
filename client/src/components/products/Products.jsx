@@ -1,13 +1,14 @@
 import * as React from "react";
 import {Product} from "./Product";
-import {MockProducts} from "./MockProducts";
 import Box from "@mui/material/Box";
 import {useTheme} from '@mui/material/styles';
 import CssBaseline from "@mui/material/CssBaseline";
+import {useProduct} from "../../providers/ProductProvider";
 
 export const Products = () => {
     const theme = useTheme();
-    // download products from db and map by single product component
+    const {productList} = useProduct();
+
     return (
         <React.Fragment>
             <CssBaseline/>
@@ -24,7 +25,7 @@ export const Products = () => {
                     gridTemplateColumns: '1fr',
                 },
             }}>
-                {MockProducts().map((product) => (
+                {productList?.map((product) => (
                     <Product key={product.id} product={product}/>
                 ))}
             </Box>

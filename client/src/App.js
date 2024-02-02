@@ -9,6 +9,7 @@ import Navbar from "./components/navbar/Navbar";
 import {CartPage} from "./pages/cartPage/CartPage";
 import {ProductsPage} from "./pages/productsPage/ProductsPage";
 import {CartProvider} from "./providers/CartProvider";
+import {ProductProvider} from "./providers/ProductProvider";
 
 const routerConfig = [
     {
@@ -23,8 +24,8 @@ const routerConfig = [
     },
     {
         path: "/products",
-        element: <ProductsPage />,
-        errorElement: <ErrorPage />,
+        element: <ProductsPage/>,
+        errorElement: <ErrorPage/>,
     },
     {
         path: "/cart",
@@ -40,17 +41,19 @@ const App = () => {
         <Router>
             {isAuthenticated ? <Navbar/> : null}
             <CartProvider>
-                <Routes>
-                    {routerConfig.map((route, index) => (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            element={isAuthenticated ? route.element : <Navigate to="/login"/>}
-                        />
-                    ))}
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/register" element={<RegisterPage/>}/>
-                </Routes>
+                <ProductProvider>
+                    <Routes>
+                        {routerConfig.map((route, index) => (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={isAuthenticated ? route.element : <Navigate to="/login"/>}
+                            />
+                        ))}
+                        <Route path="/login" element={<LoginPage/>}/>
+                        <Route path="/register" element={<RegisterPage/>}/>
+                    </Routes>
+                </ProductProvider>
             </CartProvider>
         </Router>
     );
