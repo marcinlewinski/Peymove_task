@@ -22,7 +22,6 @@ export const AuthProvider = ({children}) => {
     }, []);
     const login = async (userToken) => {
         sessionStorage.setItem('jwt', userToken);
-        console.log(userToken)
         httpClient.defaults.headers.common[
             "Authorization"
             ] = `Bearer ${userToken}`;

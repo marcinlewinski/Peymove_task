@@ -5,8 +5,10 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
+import Decimal from "decimal.js";
 
 export const OrderSummary = ({productOrder, totalPrice}) => {
+    const total = new Decimal(totalPrice).toDecimalPlaces(2).toString();
 
     return (
         <Card elevation={15} sx={{
@@ -40,14 +42,15 @@ export const OrderSummary = ({productOrder, totalPrice}) => {
                     </Grid>
                     <Grid item xs={1} sm={1} md={1} lg={1}>
                         <Typography variant="h6" component="div">
-                            ${totalPrice}
+                            ${total}
                         </Typography>
                     </Grid>
                 </Grid>
             </CardContent>
 
             <CardActions>
-                <Button size="large" color="secondary" onClick={()=>console.log(productOrder)}>
+                <Button disabled={!productOrder?.length > 0} size="large" color="secondary"
+                        onClick={() => console.log(productOrder)}>
                     BUY NOW
                 </Button>
             </CardActions>

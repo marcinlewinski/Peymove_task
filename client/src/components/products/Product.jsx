@@ -8,13 +8,12 @@ import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {useCart} from "../../providers/CartProvider";
+import {calculateCartItemData} from "../utils/calculateCartItemData";
 
 export const Product = ({product}) => {
-    const {addToCart, removeFromCart, cartItems} = useCart();
-
+    const { addToCart, removeFromCart, cartItems } = useCart();
     const cartItem = cartItems.find(item => item.id === product.id);
-    const totalPrice = cartItem ? cartItem.quantity * product.price : product.price;
-    const amount = cartItem ? cartItem.quantity : 0
+    const { totalPrice, amount } = calculateCartItemData(cartItem, product);
 
     return (
         <Card sx={{
