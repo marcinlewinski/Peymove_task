@@ -8,14 +8,13 @@ import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import {useCart} from "../../providers/CartProvider";
-import {calculateCartItemData} from "../utils/calculateCartItemData";
 
 
 export const ShoppingCartItem = ({product}) => {
     const {addToCart, removeFromCart, cartItems} = useCart();
-
     const cartItem = cartItems.find(item => item.id === product.id);
-    const {totalPrice, amount} = calculateCartItemData(cartItem, product);
+    const totalPriceItem = cartItem ? cartItem.quantity * product.price : 0;
+    const amount = cartItem ? cartItem.quantity : 0;
 
     if (amount === 0) {
         return null;
@@ -37,7 +36,7 @@ export const ShoppingCartItem = ({product}) => {
             }}
                        component="img"
                        height="140"
-                       image={product.image}
+                       image={product.productImage}
             />
             <CardContent sx={{
                 flex: "1 0 0 "
@@ -86,7 +85,7 @@ export const ShoppingCartItem = ({product}) => {
                     </Grid>
                     <Grid item xs={2} sm={2} md={2} lg={1}>
                         <Typography variant="h6" component="div" color="secondary">
-                            {totalPrice}
+                            {totalPriceItem}
                         </Typography>
                     </Grid>
                 </Grid>

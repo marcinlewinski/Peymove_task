@@ -35,6 +35,9 @@ public class User implements UserDetails {
     )
     private Set<Role> authorities;
 
+    public String getName(){
+        return this.username;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;

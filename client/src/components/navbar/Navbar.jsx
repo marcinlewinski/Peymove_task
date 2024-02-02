@@ -11,19 +11,24 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import {useNavigate} from "react-router-dom";
 import {ShoppingCart} from "@mui/icons-material";
 import {useAuth} from "../../providers/AuthProvider";
 
-const pages = ['Home', 'Products',];
-const settings = ['Logout'];
 
-function Navbar() {
+export const Navbar = () => {
+
+    const {isAuthenticated, user,logout} = useAuth();
+    const isAdmin = isAuthenticated && user?.authorities === 'ADMIN';
+    const adminPages = ['Home', 'Products', 'Users', 'Orders'];
+    const userPages = ['Home', 'Products'];
+    const pages = isAdmin ? adminPages : userPages;
+
+    const settings = ['Logout'];
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const navigate = useNavigate();
-    const {logout} = useAuth();
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -44,7 +49,7 @@ function Navbar() {
     return (
         <AppBar position="static"
         >
-            <Container  maxWidth="xl">
+            <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Typography
                         variant="h6"
@@ -52,7 +57,7 @@ function Navbar() {
                         component="a"
                         sx={{
                             mr: 2,
-                            display: { xs: 'none', md: 'flex' },
+                            display: {xs: 'none', md: 'flex'},
                             fontFamily: 'monospace',
                             fontWeight: 700,
                             letterSpacing: '.3rem',
@@ -66,7 +71,7 @@ function Navbar() {
                             onClick={() => navigate('/cart')}
                             color="inherit"
                         >
-                            <ShoppingCart />
+                            <ShoppingCart/>
                         </IconButton>
                     </Typography>
 
@@ -104,7 +109,7 @@ function Navbar() {
                                 horizontal: 'left',
                             }}
                             open={Boolean(anchorElNav)}
-                            onClose={()=> setAnchorElNav(null)}
+                            onClose={() => setAnchorElNav(null)}
                             sx={{
                                 display: {xs: 'block', md: 'none'},
                             }}
@@ -163,5 +168,3 @@ function Navbar() {
         </AppBar>
     );
 }
-
-export default Navbar;

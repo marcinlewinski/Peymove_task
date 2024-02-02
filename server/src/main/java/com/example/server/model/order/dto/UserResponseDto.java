@@ -9,4 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserResponseDto {
     private String email;
+    private String name;
+    private String roles;
 }

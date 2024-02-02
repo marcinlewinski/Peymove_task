@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import { ShoppingCartItem } from "./ShopingCartItem";
-import { MockProducts } from "../products/MockProducts";
-import { OrderSummary } from "./OrderSummary";
-import { useCart } from "../../providers/CartProvider";
+import {ShoppingCartItem} from "./ShopingCartItem";
+import {MockProducts} from "../products/MockProducts";
+import {OrderSummary} from "./OrderSummary";
+import {useCart} from "../../providers/CartProvider";
 import Box from "@mui/material/Box";
+import {useProduct} from "../../providers/ProductProvider";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 export const ShoppingCart = () => {
-    const [allProducts, setAllProducts] = useState(MockProducts);
-    const { cartItems } = useCart();
+    const { productList } = useProduct();
+    const {cartItems} = useCart();
     const [productOrder, setProductOrder] = useState(null);
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
-        const productsWithQuantity = allProducts.map((product) => {
+        const productsWithQuantity = productList?.map((product) => {
             const cartItem = cartItems.find((item) => item.id === product.id);
             const quantity = cartItem ? cartItem.quantity : 0;
             if (cartItem) {
-                return { ...product, quantity };
+                return {...product, quantity};
             }
             return null;
 
@@ -36,11 +39,9 @@ export const ShoppingCart = () => {
         }, 0);
 
         setTotalPrice(calculatedTotalPrice);
-    }, [allProducts,cartItems]);
-
+    }, [productList, cartItems]);
     return (
-        <React.Fragment>
-            <CssBaseline />
+
             <Container fixed>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6} md={7} lg={7}>
@@ -48,10 +49,15 @@ export const ShoppingCart = () => {
                             <Grid item xs>
                                 {productOrder && productOrder.length > 0 ? (
                                     productOrder.map((product) => (
-                                        <ShoppingCartItem key={product.id} product={product} />
+                                        <ShoppingCartItem key={product.id} product={product}/>
                                     ))
                                 ) : (
-                                    <Box>Your cart is empty</Box>
+                                    <Paper elevation={1} sx={{margin: "2rem", padding: "20px", textAlign: "center"}}>
+
+                                        <Typography variant='body3'>
+                                           Your cart is empty!
+                                        </Typography>
+                                    </Paper>
                                 )}
                             </Grid>
                         </Grid>
@@ -61,6 +67,5 @@ export const ShoppingCart = () => {
                     </Grid>
                 </Grid>
             </Container>
-        </React.Fragment>
     );
 };

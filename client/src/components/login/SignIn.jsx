@@ -36,7 +36,6 @@ export default function SignIn() {
             try {
                 const response = await httpClient.post("/auth/login", values);
                 login(response.data.jwt);
-                console.log(response);
                 navigate('/');
             } catch (error) {
                 console.error('Error while logging in:', error);
