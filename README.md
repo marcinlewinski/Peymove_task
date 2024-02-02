@@ -31,21 +31,21 @@ The goal of this project is to create a simple e-commerce application as part of
 
 ## 🖼️ Demo 
 
-  Login | Registration 
+  Login |  Cart
 :-------------------------:|:-------------------------:
-![Login screen]()  |  ![Registration screen]()
+![Login screen](.github/images/login.gif)  |  ![Cart screen](.github/images/cart.gif) 
 
-Products | Cart
+Products | Registration 
 :-------------------------:|:-------------------------:
-![Product screen]()  |  ![Cart screen]()
+![Product screen](.github/images/products.png)  | ![Registration screen](.github/images/registration.png)
 
 Users page | Orders page
 :-------------------------:|:-------------------------:
-![Users screen]()  |  ![Orders screen]()
+![Users screen](.github/images/users.png)  |  ![Orders screen](.github/images/orders.png)
 
 Admin view | User view
 :-------------------------:|:-------------------------:
-![Users screen]()  |  ![Orders screen]()
+![Users screen](.github/images/adminView.png)  |  ![Orders screen](.github/images/userView.png)
   
 
 
