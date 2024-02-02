@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service implementation for managing products in the system.
+ */
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
@@ -16,6 +19,11 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
+    /**
+     * Retrieves a list of all products in the system.
+     *
+     * @return List of Product objects representing all products.
+     */
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();

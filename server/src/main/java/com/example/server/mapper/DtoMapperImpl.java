@@ -14,8 +14,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of the DtoMapper interface for mapping entities to DTOs.
+ */
 @Component
 public class DtoMapperImpl implements DtoMapper {
+    /**
+     * Maps a list of Order entities to a list of OrderResponseDto.
+     *
+     * @param orders List of Order entities.
+     * @return List of OrderResponseDto.
+     */
     @Override
     public List<OrderResponseDto> mapToOrderResponseDtoList(List<Order> orders) {
         return orders.stream()
@@ -46,6 +55,13 @@ public class DtoMapperImpl implements DtoMapper {
         return orderItemResponseDto;
     }
 
+    /**
+     * Maps a list of User entities to a list of UserResponseDto.
+     * If the input list is null, an empty list is returned.
+     *
+     * @param users List of User entities.
+     * @return List of UserResponseDto.
+     */
     @Override
     public List<UserResponseDto> mapUserResponseDtoList(List<User> users) {
         if (users == null) {

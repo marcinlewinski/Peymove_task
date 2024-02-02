@@ -20,6 +20,9 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Service for user authentication and registration.
+ */
 @Service
 public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
@@ -37,6 +40,14 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Authenticates a user with the provided email and password and generates a JWT token.
+     *
+     * @param email    The email of the user.
+     * @param password The password of the user.
+     * @return LoginResponseDTO containing the JWT token.
+     * @throws AuthenticationFailedException if authentication fails.
+     */
     public LoginResponseDTO loginUser(String email, String password) {
         try {
             Authentication authentication = authenticationManager.authenticate(
@@ -50,6 +61,14 @@ public class AuthenticationService {
         }
     }
 
+    /**
+     * Registers a new user with the provided email, password, and username.
+     *
+     * @param email    The email of the user.
+     * @param password The password of the user.
+     * @param username The username of the user.
+     * @throws RegistrationException if registration fails.
+     */
     public void registerUser(String email, String password, String username) {
         if (userRepository.findByEmail(email).isPresent()) {
             throw new RegistrationException("User with this email already exists.");

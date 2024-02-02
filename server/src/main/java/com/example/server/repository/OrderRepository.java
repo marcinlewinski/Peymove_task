@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+/**
+ * Repository interface for managing orders in the system.
+ */
 @Repository
 public interface OrderRepository extends JpaRepository<Order, UUID> {
 
