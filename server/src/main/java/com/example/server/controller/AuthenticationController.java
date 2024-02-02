@@ -18,17 +18,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
+    /**
+     * Constructor to inject the AuthenticationService dependency.
+     *
+     * @param authenticationService AuthenticationService instance.
+     */
     @Autowired
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
 
+    /**
+     * Endpoint for user authentication.
+     *
+     * @param request AuthenticationRequestDTO containing user credentials.
+     * @return ResponseEntity containing LoginResponseDTO on successful authentication.
+     */
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> authenticate(@RequestBody AuthenticationRequestDTO request) {
         LoginResponseDTO response = authenticationService.loginUser(request.getEmail(), request.getPassword());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * Endpoint for user registration.
+     *
+     * @param request RegistrationDTO containing user registration details.
+     * @return ResponseEntity with a success message on successful registration,
+     * or an error message with HttpStatus.BAD_REQUEST on registration failure.
+     */
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody RegistrationDTO request) {
         try {
