@@ -39,9 +39,7 @@ export const ShoppingCartItem = ({product}) => {
                        image={product.productImage}
             />
             <CardContent sx={{
-
                 flex: "1 0 0 "
-
             }}>
 
                 <Typography variant="div" component="h2">

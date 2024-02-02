@@ -21,7 +21,6 @@ export const OrderSummary = ({productOrder, totalPrice}) => {
     const total = new Decimal(totalPrice).toDecimalPlaces(2).toString();
     const {user} = useAuth();
     const {cleanCart} = useCart();
-    const navigate = useNavigate();
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState("");
     const [snackbarSeverity, setSnackbarSeverity] = useState("success");

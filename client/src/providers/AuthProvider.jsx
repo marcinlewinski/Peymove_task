@@ -33,8 +33,6 @@ export const AuthProvider = ({children}) => {
         setUser(decodedUser);
         setIsAuthenticated(true);
     };
-
-
     const logout = () => {
         delete httpClient.defaults.headers.common["Authorization"];
         sessionStorage.removeItem('jwt');

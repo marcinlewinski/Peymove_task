@@ -15,14 +15,20 @@ import {useNavigate} from "react-router-dom";
 import {ShoppingCart} from "@mui/icons-material";
 import {useAuth} from "../../providers/AuthProvider";
 
-const pages = ['Home', 'Products',];
-const settings = ['Logout'];
 
-function Navbar() {
+export const Navbar = () => {
+
+    const {isAuthenticated, user,logout} = useAuth();
+    const isAdmin = isAuthenticated && user?.authorities === 'ADMIN';
+    const adminPages = ['Home', 'Products', 'Users', 'Orders'];
+    const userPages = ['Home', 'Products'];
+    const pages = isAdmin ? adminPages : userPages;
+
+    const settings = ['Logout'];
+
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const navigate = useNavigate();
-    const {logout} = useAuth();
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -162,5 +168,3 @@ function Navbar() {
         </AppBar>
     );
 }
-
-export default Navbar;

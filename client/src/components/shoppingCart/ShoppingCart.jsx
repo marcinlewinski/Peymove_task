@@ -8,6 +8,8 @@ import {OrderSummary} from "./OrderSummary";
 import {useCart} from "../../providers/CartProvider";
 import Box from "@mui/material/Box";
 import {useProduct} from "../../providers/ProductProvider";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 
 export const ShoppingCart = () => {
     const { productList } = useProduct();
@@ -39,8 +41,7 @@ export const ShoppingCart = () => {
         setTotalPrice(calculatedTotalPrice);
     }, [productList, cartItems]);
     return (
-        <React.Fragment>
-            <CssBaseline/>
+
             <Container fixed>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6} md={7} lg={7}>
@@ -51,7 +52,12 @@ export const ShoppingCart = () => {
                                         <ShoppingCartItem key={product.id} product={product}/>
                                     ))
                                 ) : (
-                                    <Box>Your cart is empty</Box>
+                                    <Paper elevation={1} sx={{margin: "2rem", padding: "20px", textAlign: "center"}}>
+
+                                        <Typography variant='body3'>
+                                           Your cart is empty!
+                                        </Typography>
+                                    </Paper>
                                 )}
                             </Grid>
                         </Grid>
@@ -61,6 +67,5 @@ export const ShoppingCart = () => {
                     </Grid>
                 </Grid>
             </Container>
-        </React.Fragment>
     );
 };

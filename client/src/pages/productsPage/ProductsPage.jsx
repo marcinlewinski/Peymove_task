@@ -1,11 +1,14 @@
 import {Products} from "../../components/products/Products";
-import Navbar from "../../components/navbar/Navbar";
+import React from "react";
+import CssBaseline from "@mui/material/CssBaseline";
 
 export const ProductsPage = () => {
-  return(
-      <>
-        <Products></Products>
-      </>
+    return (
+        <React.Fragment>
+            <CssBaseline/>
+            <Products></Products>
+        </React.Fragment>
 
-  )
+
+    )
 }
