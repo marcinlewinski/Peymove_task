@@ -86,7 +86,7 @@ export const ShoppingCartItem = ({product}) => {
                     </Grid>
                     <Grid item xs={2} sm={2} md={2} lg={1}>
                         <Typography variant="h6" component="div" color="secondary">
-                            {totalPrice}
+                            {totalPrice}$
                         </Typography>
                     </Grid>
                 </Grid>
